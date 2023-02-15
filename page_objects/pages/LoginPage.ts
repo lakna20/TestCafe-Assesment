@@ -1,23 +1,22 @@
-import {Selector, t} from 'testcafe'
-class LoginPage{
-    constructor(){
+import { Selector, t } from "testcafe";
 
-        this.userName= Selector("#user-name");
-        this.password= Selector("#password");
-        this.loginButton=Selector("#login-button");
-    }
+class LoginPage {
+  usernameInput: Selector;
+  passwordInput: Selector;
+  loginButton: Selector;
 
-    async typeUserName(user) {
-        await t.typeText(this.userName,user)
-    }
-    async typePassword(pass){
-        await t
-        .typeText(this.password,pass)
-    }
-    async clickLoginBtn(){
-        await t
-        .click(this.loginButton)
-    }
+  constructor() {
+    this.usernameInput = Selector('#user-name');
+    this.passwordInput = Selector('#password');
+    this.loginButton = Selector('#login-button');
+  }
+
+  async login(username: string, password: string) {
+    await t
+      .typeText(this.usernameInput, username)
+      .typeText(this.passwordInput, password)
+      .click(this.loginButton)
+  }
 }
 
-export default LoginPage
+export default new LoginPage();
